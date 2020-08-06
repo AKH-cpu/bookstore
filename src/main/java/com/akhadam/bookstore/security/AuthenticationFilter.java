@@ -1,5 +1,6 @@
 package com.akhadam.bookstore.security;
 
+
 import com.akhadam.bookstore.SpringApplicationContext;
 import com.akhadam.bookstore.dto.UserDto;
 import com.akhadam.bookstore.requests.UserLoginRequest;
@@ -22,10 +23,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-
 
     public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -39,10 +40,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     creds.getEmail(),
                     creds.getPassword(),
-                    new ArrayList<>())
-            );
+                    new ArrayList<>()));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
+
         }
     }
 
@@ -62,11 +64,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String token = Jwts.builder()
                 .setSubject(userEmail)
                 .claim("id", userDto.getUserId())
-                .claim("firstName", userDto.getLastName())
-                .claim("lastName", userDto.getLastName())
+                .claim("name", userDto.getLastName())
                 .setExpiration(new Date(expirationTime))
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
                 .compact();
+
 
         response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
         response.addHeader("user_id", userDto.getUserId());

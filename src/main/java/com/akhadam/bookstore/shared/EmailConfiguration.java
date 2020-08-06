@@ -3,8 +3,9 @@ package com.akhadam.bookstore.shared;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class EmailConfiguration {
+    /*
 
     @Value("${spring.mail.host}")
     private String host;
@@ -49,4 +50,6 @@ public class EmailConfiguration {
     public void setPassword(String password) {
         this.password = password;
     }
+
+     */
 }

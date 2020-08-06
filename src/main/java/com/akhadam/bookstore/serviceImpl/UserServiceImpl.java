@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 
 @Service
@@ -36,13 +37,13 @@ public class UserServiceImpl implements UserService {
 
         if (foundedUser != null) throw new RuntimeException("user already exists");
 
-        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+        UserEntity user = modelMapper.map(userDto, UserEntity.class);
 
-        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        user.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
-        userEntity.setUserId(utils.generateId(30));
+        user.setUserId(utils.generateId(30));
 
-        UserEntity newUser = userRepository.save(userEntity);
+        UserEntity newUser = userRepository.save(user);
 
         return modelMapper.map(newUser, UserDto.class);
     }

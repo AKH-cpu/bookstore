@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "wishlists")
-public class Wishlist implements Serializable {
+@Table(name = "stocks")
+public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -13,15 +13,11 @@ public class Wishlist implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String wishlistId;
+    private Double qte;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
-
-    @ManyToOne
     @JoinColumn(name = "book_id")
-    private  Book book;
+    private Book book;
 
     public Long getId() {
         return id;
@@ -31,20 +27,12 @@ public class Wishlist implements Serializable {
         this.id = id;
     }
 
-    public String getWishlistId() {
-        return wishlistId;
+    public Double getQte() {
+        return qte;
     }
 
-    public void setWishlistId(String wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setQte(Double qte) {
+        this.qte = qte;
     }
 
     public Book getBook() {
